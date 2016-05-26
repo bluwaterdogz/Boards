@@ -1,0 +1,505 @@
+.colorful {
+  color: $clrHilight;
+}
+
+.panel-heading{
+
+    font-size:23px;
+    padding:10px;
+    color:rgba(120,120,120,1);
+    .fa-times{
+        transition:700ms;
+    }
+    .fa-pencil, .fa-save{
+        transition:700ms;
+    }
+
+}
+.panel-body{
+    font-size:20px;
+    text-align:center;
+    height:100px;
+
+}
+.modal-dialog{
+
+}
+.draft{
+    .panel{
+        transition:700ms;
+        input{
+            border:0 none;
+            border-bottom:1px solid black;
+            border-radius:4px;
+        }
+        textarea{
+            border-radius:4px;
+            overflow:scroll;
+            text-align:center;
+            resize:none;
+            width:90%;
+            height:200%;
+            display:block;
+            font-size:30px;
+            color:#9DA9A0;
+            margin:auto;
+        }
+    }
+}
+
+.published{
+    .panel{
+
+        overflow:hidden;
+        input{
+            border:none;
+            background-color:rgba(0,0,0,0);
+        }
+        textarea{
+            border:none;
+            outline:none;
+            overflow:hidden;
+            text-align:center;
+            resize:none;
+            background-color:rgba(0,0,0,0);
+            width:90%;
+            height:90%;
+            display:block;
+            font-size:30px;
+            color:#9DA9A0;
+            margin:auto;
+
+            }
+        .panel-body{
+            .h2{
+            margin:0px auto;
+            }
+        }
+        textarea::first-letter{
+            font-size:40px;
+        }
+    }
+}
+
+.btn{
+    transition:500ms;
+}
+
+.btn:hover{
+    transform:scale(1.05);
+}
+.panel{
+transition:700ms;
+}
+.panel:hover{
+    background-color:rgba(245,240,250,1);
+}
+.container{
+    margin:20px;
+    padding:10px;
+}
+.button-controls{
+/* float: right; */
+position: absolute;
+top: 10px;
+right: 10px;
+
+}
+
+.panel-heading{
+    .read{
+        float:left;
+    }
+    .edit{
+        display:inline-block;
+        float:right;
+    }
+}
+.input-group{
+    margin:10px;
+}
+.modal-title{
+    font-size:30px;
+}
+textarea{
+            margin:auto;
+}
+textarea.form-control{
+    margin:auto;
+    width:97%
+}
+input.form-control{
+    width:100%
+}
+.panel_title_small{
+    font-size:19px;
+}
+.edit{
+    float:right;
+    z-index:100;
+}
+.textBlob_myText_row{
+    text-align:center;
+}
+.clear{
+    clear:both
+}
+.edit button{
+    background:none;
+}
+#posts_board__row{
+    display:none;
+}
+
+.page-header{
+    position:relative;
+    .edit{
+        position:absolute;
+        top:0px;
+        right:0px;
+    }
+}
+#addPostFormContainer{
+    position:relative;
+    .btn{
+
+    }
+}
+
+.h1{
+    font-size:70px;
+    color:$text;
+}
+.h2{
+
+    color:#9DA9A0;
+ }
+
+.btn{
+    background:rgba(0,0,0,0);
+    color:black;
+}
+input{
+    // background-color:rgba(0,0,0,0) !important;
+}
+body{
+    color:#2D3142;
+    background:white;
+}
+.panel{
+    background-color:rgba(0,0,0,0);
+    border:1px solid ;
+    border-color:#4F5D75;
+    padding:5px;
+    .h2::first-letter{
+        font-size:40px;
+    }
+    p{
+        color:$text;
+        line-height:30px;
+        transition:1000ms;
+    }
+    p:hover{
+        color:$highlight1;
+    }
+     a{
+        color:$text;
+     }
+}
+
+.boardContainer{
+    .panel{
+        height:300px;
+        overflow:scroll;
+        .fa-times:hover{
+            color:red;
+        }
+        .fa-pencil:hover, .fa-save:hover{
+            color:green;
+        }
+    }
+
+    .panel:hover, .btn:hover{
+        transform:scale(1.05);
+    }
+
+}
+.postContainer{
+    .panel{
+        height:300px;
+        font-size:23px;
+        color:rgba(100,100,100,1);
+        padding-bottom:10px;
+        padding-left:10px;
+        overflow:scroll;
+        .fa-times:hover{
+
+            color:red;
+        }
+        .fa-pencil:hover,.fa-save:hover{
+            color:green;
+        }
+    }
+}
+.styleless_btn{
+    border:0 none;
+    background:none;
+}
+.clear{
+    margin-bottom:20px;
+}
+.panel:hover{
+    border-color:$highlight1;
+}
+.highlight{
+    color:$highlight1;
+}
+
+.signInContainer{
+    width:700px;
+    padding:30px;
+    margin:200px auto;
+    border:1px solid $dark;
+    border-radius:5px;
+}
+.formcont{
+    width:700px;
+    padding:30px;
+    margin:200px auto;
+    border:1px solid $dark;
+    border-radius:5px;
+}
+
+.cont{
+    padding:0px 50px;
+    min-width:1000px;
+}
+.pan-footer{
+    transition:500ms;
+    background:rgba(250,250,250,.6);
+    border-radius:5px;
+    border:1px solid $dark;
+    position:absolute;
+    bottom:40px;
+    right:40px;
+    padding:3px;
+}
+.pan-footer:hover{
+    background:rgba(200,200,250,.6);
+}
+
+/* Free loader from http://codepen.io/highlyinteractive/pen/dCahl */
+.whirlpool {
+  width: 100px;
+  height: 100px;
+  margin: 100px auto;
+  position: relative;
+}
+
+.ring:before
+{
+  content: '';
+  border-radius: 50%;
+  border: 1px solid #555;
+  height: 30px;
+  width: 100px;
+  position: absolute;
+}
+
+.ring1:before
+{
+  left: 40px;
+  width: 20px;
+  top: 12px;
+  height: 6px;
+  -webkit-animation: 2.5s ease 0s infinite spinner;
+          animation: 2.5s ease 0s infinite spinner;
+}
+
+.ring2:before
+{
+  left: 35px;
+  width: 30px;
+  top: 10.5px;
+  height: 9px;
+  -webkit-animation: 2.5s ease 0.1s infinite spinner;
+          animation: 2.5s ease 0.1s infinite spinner;
+}
+
+.ring3:before
+{
+  left: 30px;
+  width: 40px;
+  top: 9px;
+  height: 12px;
+  -webkit-animation: 2.5s ease 0.2s infinite spinner;
+          animation: 2.5s ease 0.2s infinite spinner;
+}
+
+.ring4:before
+{
+  left: 25px;
+  width: 50px;
+  top: 7.5px;
+  height: 15px;
+  -webkit-animation: 2.5s ease 0.3s infinite spinner;
+          animation: 2.5s ease 0.3s infinite spinner;
+}
+
+.ring5:before
+{
+  left: 20px;
+  width: 60px;
+  top: 6px;
+  height: 18px;
+  -webkit-animation: 2.5s ease 0.4s infinite spinner;
+          animation: 2.5s ease 0.4s infinite spinner;
+}
+
+.ring6:before
+{
+  left: 15px;
+  width: 70px;
+  top: 4.5px;
+  height: 21px;
+  -webkit-animation: 2.5s ease 0.5s infinite spinner;
+          animation: 2.5s ease 0.5s infinite spinner;
+}
+
+.ring7:before
+{
+  left: 10px;
+  width: 80px;
+  top: 3px;
+  height: 24px;
+  -webkit-animation: 2.5s ease 0.6s infinite spinner;
+          animation: 2.5s ease 0.6s infinite spinner;
+}
+
+.ring8:before
+{
+  left: 5px;
+  width: 90px;
+  top: 1.5px;
+  height: 27px;
+  -webkit-animation: 2.5s ease 0.7s infinite spinner;
+          animation: 2.5s ease 0.7s infinite spinner;
+}
+
+.ring9:before
+{
+  width: 100px;
+  height: 30px;
+  -webkit-animation: 2.5s ease 0.8s infinite spinner;
+          animation: 2.5s ease 0.8s infinite spinner;
+}
+
+@-webkit-keyframes spinner {
+  0% {
+    -webkit-transform: translateY(10px);
+            transform: translateY(10px);
+    -webkit-animation-timing-function: cubic-bezier(0.455, 0.030, 0.515, 0.955);
+            animation-timing-function: cubic-bezier(0.455, 0.030, 0.515, 0.955);
+  }
+  50% {
+    -webkit-transform: translateY(60px);
+            transform: translateY(60px);
+    -webkit-animation-timing-function: cubic-bezier(0.455, 0.030, 0.515, 0.955);
+            animation-timing-function: cubic-bezier(0.455, 0.030, 0.515, 0.955);
+  }
+  100% {
+    -webkit-transform: translateY(10px);
+            transform: translateY(10px);
+    -webkit-animation-timing-function: cubic-bezier(0.455, 0.030, 0.515, 0.955);
+            animation-timing-function: cubic-bezier(0.455, 0.030, 0.515, 0.955);
+  }
+}
+
+@keyframes spinner {
+  0% {
+    -webkit-transform: translateY(10px);
+            transform: translateY(10px);
+    -webkit-animation-timing-function: cubic-bezier(0.455, 0.030, 0.515, 0.955);
+            animation-timing-function: cubic-bezier(0.455, 0.030, 0.515, 0.955);
+  }
+  50% {
+    -webkit-transform: translateY(60px);
+            transform: translateY(60px);
+    -webkit-animation-timing-function: cubic-bezier(0.455, 0.030, 0.515, 0.955);
+            animation-timing-function: cubic-bezier(0.455, 0.030, 0.515, 0.955);
+  }
+  100% {
+    -webkit-transform: translateY(10px);
+            transform: translateY(10px);
+    -webkit-animation-timing-function: cubic-bezier(0.455, 0.030, 0.515, 0.955);
+            animation-timing-function: cubic-bezier(0.455, 0.030, 0.515, 0.955);
+  }
+}
+@keyframes fader {
+  0% {
+            opacity:0;
+            animation-timing-function: cubic-bezier(0.455, 0.030, 0.515, 0.955);
+  }
+  20% {
+            opacity:0;
+            animation-timing-function: cubic-bezier(0.455, 0.030, 0.515, 0.955);
+  }
+  50% {
+            opacity:1;
+            animation-timing-function: cubic-bezier(0.455, 0.030, 0.515, 0.955);
+  }
+  80% {
+            opacity:0;
+            animation-timing-function: cubic-bezier(0.455, 0.030, 0.515, 0.955);
+  }
+  100% {
+            opacity:0;
+            animation-timing-function: cubic-bezier(0.455, 0.030, 0.515, 0.955);
+  }
+}
+@keyframes fader2 {
+  0% {
+            opacity:0;
+            animation-timing-function: cubic-bezier(0.455, 0.030, 0.515, 0.955);
+  }
+  10% {
+            opacity:0;
+            animation-timing-function: cubic-bezier(0.455, 0.030, 0.515, 0.955);
+  }
+  50% {
+            opacity:1;
+            animation-timing-function: cubic-bezier(0.455, 0.030, 0.515, 0.955);
+  }
+  90% {
+            opacity:0;
+            animation-timing-function: cubic-bezier(0.455, 0.030, 0.515, 0.955);
+  }
+  100% {
+            opacity:0;
+            animation-timing-function: cubic-bezier(0.455, 0.030, 0.515, 0.955);
+  }
+}
+.h4{
+    text-align:center;
+    }
+span.error{
+    color:rgba(148,18,18,1) ;
+    animation: 4s ease 0.0s infinite fader2;
+}
+.saving, .deleting, adding, .big_error{
+    .del{color:rgba(148,18,18,1) ;}
+    .add{color:rgba(18,148,18,1) ;}
+
+    .s1{animation: 2s ease 0.0s infinite fader;}
+    .s2{animation: 2s ease 0.1s infinite fader;}
+    .s3{animation: 2s ease 0.2s infinite fader;}
+    .s4{animation: 2s ease 0.3s infinite fader;}
+    .s5{animation: 2s ease 0.4s infinite fader;}
+    .s6{animation: 2s ease 0.5s infinite fader;}
+    .s7{animation: 2s ease 0.6s infinite fader;}
+    .s8{animation: 2s ease 0.7s infinite fader;}
+    .s9{animation: 2s ease 0.8s infinite fader;}
+    .s10{animation: 2s ease 0.9s infinite fader;}
+    .s11{animation: 2s ease 1.0s infinite fader;}
+}
+.saving span{opacity:0;}

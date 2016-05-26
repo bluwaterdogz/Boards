@@ -1,0 +1,5 @@
+delete_icon = I(_class="fa fa-times")
+trashcan_icon = I(_class="fa fa-trash")
+edit_icon = I(_class="fa fa-pencil")
+thumbs_up = I(_class="fa fa-thumbs-o-up")
+save_icon = I(_class="fa fa-save")

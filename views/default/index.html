@@ -1,0 +1,274 @@
+{{left_sidebar_enabled,right_sidebar_enabled=False,('message' in globals())}}
+{{extend 'layout.html'}}
+
+<div class="cont boardContainer">
+    <div class="page-header">
+        <span class="h1">
+            Bulletins. <br>
+        </span>
+        <span class="h2">
+            {{if auth.user_id:}}
+             Hi {{=auth.user.first_name}}!
+            {{pass}}
+        </span>
+        <div class="button-controls">
+            {{if not auth.user_id:}}
+                <span class="btn-group ">
+                    {{=A('Sign In', _class="btn btn-primary", _href=URL('default','user',args=['login']))}}
+                    {{=A('Sign Up', _class="btn btn-success", _href=URL('default','user',args=['register']))}}
+                </span>
+            {{else:}}
+                <span class="btn-group ">
+                    <button class="btn btn-success" id="add_board">Add Board</button>
+                    {{=A('Log Out',_type="button",_class="btn btn-warning",_href=URL('default','user',args=['logout']))}}
+                </span>
+            {{pass}}
+        </div>
+        <div class="clear"></div>
+    </div>
+
+
+    <div id="ractive">
+    </div>
+
+    <script id="template" type="text/ractive">
+    <div id="message" class="h2"></div>
+    {% #if loading %}
+        <div class="whirlpool">
+            <div class="ring ring1"></div>
+            <div class="ring ring2"></div>
+            <div class="ring ring3"></div>
+            <div class="ring ring4"></div>
+            <div class="ring ring5"></div>
+            <div class="ring ring6"></div>
+            <div class="ring ring7"></div>
+            <div class="ring ring8"></div>
+            <div class="ring ring9"></div>
+        </div>
+    {% /if %}
+    {% #if editing %}
+        <div class="col-md-6" id="new_board">
+            <div class="panel">
+                <div class="panel-heading">
+                    <input type="text" value="{% new_board_title %}" id="new_board_title">
+
+                    <div class="edit">
+                        <!-- Save board Button-->
+                        <button class="styleless_btn" on-click="submit_new_board">
+                            {{=save_icon}}
+                        </button>
+                        <!-- Delete board Button-->
+                        <button class="styleless_btn" data-boardid="{% draft_id %}" on-click="delete_board">
+                            {{=delete_icon}}
+                        </button>
+                    </div>
+
+                    <div class="clear"></div>
+                </div>
+                <div class="panel-body">
+                    <div class="h2">
+                        <textarea name="new_board_desc" id="" cols="15" rows="4" value="{% new_board_desc %}" id="new_board_desc"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% /if %}
+
+    {% #board_dict:board_id %}
+
+        <div class="col-md-6">
+            <div class="panel">
+                <div class="panel-heading">
+                    {% board_title %}
+                    <div class="edit">
+                        <!-- Show if user who is logged in created board-->
+                        {% #if {{=auth.user_id}} === board_createdBy %}
+                            <!-- Edit Board Button-->
+                            <button class="styleless_btn" data-boardid="{% board_id %}" on-click="edit_board">
+                                {{=edit_icon}}
+                            </button>
+                            <!-- Delete board Button-->
+                            <button class="styleless_btn" data-boardid="{% board_id %}" on-click="delete_board">
+                                {{=delete_icon}}
+                            </button>
+                        {% /if %}
+
+                    </div>
+                    <div class="clear"></div>
+                </div>
+
+                <div class="panel-body" onclick='window.location.assign("{{=URL("default","board", args=())}}/{% board_id %}")'>
+                    <div class="h2">{% board_description %}</div>
+                    {% #if {{=auth.user_id}} === board_createdBy %}
+                        <p>Your board</p>
+                    {% /if %}
+                </div>
+            </div>
+        </div>
+    {% /board_dict %}
+
+    </script>
+
+    <script>
+
+    $(function(){
+        var ractive = new Ractive({
+            el: '#ractive',
+            template:'#template',
+            delimiters:['{%','%}'],
+            tripleDelimiters:['{%%','%%}'],
+            data:{
+                board_dict:{},
+                editing:false,
+                loading:true,
+                draft_id:"{{=draft_id}}",
+                new_board_desc:"",
+                new_board_title:""
+            }
+        });
+
+        <!-- Load Boards-->
+        function load_boards(){
+            $.ajax("{{=URL('default','load_boards',user_signature=True)}}",{
+                method:'POST',
+                success:function(data){
+                    ractive.set('board_dict',data['board_dict']);
+                    ractive.set('loading',false);
+                     // TODO Try keys, else display message that browser doesn't support
+                     check_for_boards();
+
+                },
+                error:function(error){
+                    ractive.set('loading',false);
+                    $("#message").text("Looks like your boards got lost somewhere....");
+                }
+            });
+
+        }
+
+
+        function check_for_boards(){
+            if(
+                !ractive.get('loading') &&
+                !ractive.get('editing') &&
+                Object.keys(ractive.get('board_dict')).length<=0
+            ){
+                $("#message").text("No Boards Yet, feel free to create a board!");
+            }else{
+                $("#message").text("");
+            }
+        }
+
+        <!-- Get new UUID -->
+        function get_uuid(){
+            $.ajax("{{=URL('default','get_new_id')}}",{
+                method:'POST',
+                success: function(data){
+                    ractive.set('draft_id',data['draft_id']);
+                }
+            });
+        }
+
+        <!-- send data to server -->
+        function save_board(title, desc){
+            var get_draft_id = ractive.get('draft_id');
+
+            if($.trim(title).length>0 || $.trim(desc).length>0 ){
+                $.ajax("{{=URL('default','save_board', user_signature=True)}}",{
+                    data:{
+                        descrption:desc,
+                        title:title,
+                        board_id:get_draft_id,
+                        createdBy:{{=auth.user_id}}
+                        },
+                    method:'POST',
+                    success:function(){
+                        var board_dict = ractive.get('board_dict');
+
+
+                        // if the objects id can be found in the ractive object, update the object with that id
+                        if(get_draft_id in board_dict){
+                            board_dict[get_draft_id]['board_title'] = title;
+                            board_dict[get_draft_id]['board_description'] = desc;
+
+                        // if it isn't, create a new id and add it into the ractive object
+                        }else{
+                            board_dict[get_draft_id] = {
+                                board_title : title,
+                                board_description : desc,
+                            }
+                        }
+                        ractive.set('board_dict', board_dict);
+                        load_boards();
+                    }
+                });
+            }else{
+                $("#message").text("At least add a title or a description!");
+            }
+        }
+
+        function periodic_update(){
+            if(!ractive.get('editing'))
+                load_boards()
+        }
+
+        ractive.on('delete_board', function(e){
+            var t = $(e.node);
+            var clicked_id = t.data('boardid');
+            var board_dict = ractive.get('board_dict');
+
+            $.ajax("{{=URL('default','delete_board', user_signature=True)}}",{
+                data:{
+                    board_id : clicked_id
+                    },
+                method:'POST',
+                success:function(){
+                    load_boards();
+                    ractive.get('editing', false);
+                    //TODO: Delete all posts from this board
+                    }
+            });
+        });
+
+        ractive.on('submit_new_board',function(e){
+            var title = ractive.get('new_board_title');
+            var desc = ractive.get('new_board_desc');
+
+            save_board(title,desc);
+
+            ractive.set('editing', false);
+            ractive.set('new_board_title',"");
+            ractive.set('new_board_desc',"");
+            get_uuid();
+        });
+
+        ractive.on('edit_board',function(e){
+            var t = $(e.node);
+            var clicked_id = t.data('boardid');
+            var board_dict = ractive.get('board_dict');
+            ractive.set('editing',true);
+            // find way to individualize editing and load boards without loading board being edited
+
+            ractive.set('new_board_desc',board_dict[clicked_id]['board_description']);
+            ractive.set('new_board_title',board_dict[clicked_id]['board_title']);
+            ractive.set('draft_id',clicked_id);
+
+            delete board_dict[clicked_id];
+            ractive.set('board_dict',board_dict);
+        });
+
+        $('#add_board').click(function(e){
+            e.preventDefault();
+            ractive.set('editing',true);
+            $('#message').text("");
+        });
+
+        load_boards();
+        setInterval(periodic_update,10000);
+    });
+
+    </script>
+</div>
+
+
+

@@ -1,0 +1,672 @@
+/* line 5, ../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  font-size: 100%;
+  vertical-align: baseline;
+}
+
+/* line 22, ../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+html {
+  line-height: 1;
+}
+
+/* line 24, ../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+ol, ul {
+  list-style: none;
+}
+
+/* line 26, ../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* line 28, ../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+caption, th, td {
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle;
+}
+
+/* line 30, ../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+q, blockquote {
+  quotes: none;
+}
+/* line 103, ../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+q:before, q:after, blockquote:before, blockquote:after {
+  content: "";
+  content: none;
+}
+
+/* line 32, ../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+a img {
+  border: none;
+}
+
+/* line 116, ../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
+  display: block;
+}
+
+/* line 1, ../sass/_main.scss */
+.colorful {
+  color: #bb8833;
+}
+
+/* line 5, ../sass/_main.scss */
+.panel-heading {
+  font-size: 23px;
+  padding: 10px;
+  color: #787878;
+}
+/* line 10, ../sass/_main.scss */
+.panel-heading .fa-times {
+  transition: 700ms;
+}
+/* line 13, ../sass/_main.scss */
+.panel-heading .fa-pencil, .panel-heading .fa-save {
+  transition: 700ms;
+}
+
+/* line 18, ../sass/_main.scss */
+.panel-body {
+  font-size: 20px;
+  text-align: center;
+  height: 100px;
+}
+
+/* line 28, ../sass/_main.scss */
+.draft .panel {
+  transition: 700ms;
+}
+/* line 30, ../sass/_main.scss */
+.draft .panel input {
+  border: 0 none;
+  border-bottom: 1px solid black;
+  border-radius: 4px;
+}
+/* line 35, ../sass/_main.scss */
+.draft .panel textarea {
+  border-radius: 4px;
+  overflow: scroll;
+  text-align: center;
+  resize: none;
+  width: 90%;
+  height: 200%;
+  display: block;
+  font-size: 30px;
+  color: #9DA9A0;
+  margin: auto;
+}
+
+/* line 51, ../sass/_main.scss */
+.published .panel {
+  overflow: hidden;
+}
+/* line 54, ../sass/_main.scss */
+.published .panel input {
+  border: none;
+  background-color: transparent;
+}
+/* line 58, ../sass/_main.scss */
+.published .panel textarea {
+  border: none;
+  outline: none;
+  overflow: hidden;
+  text-align: center;
+  resize: none;
+  background-color: transparent;
+  width: 90%;
+  height: 90%;
+  display: block;
+  font-size: 30px;
+  color: #9DA9A0;
+  margin: auto;
+}
+/* line 74, ../sass/_main.scss */
+.published .panel .panel-body .h2 {
+  margin: 0px auto;
+}
+/* line 78, ../sass/_main.scss */
+.published .panel textarea::first-letter {
+  font-size: 40px;
+}
+
+/* line 84, ../sass/_main.scss */
+.btn {
+  transition: 500ms;
+}
+
+/* line 88, ../sass/_main.scss */
+.btn:hover {
+  transform: scale(1.05);
+}
+
+/* line 91, ../sass/_main.scss */
+.panel {
+  transition: 700ms;
+}
+
+/* line 94, ../sass/_main.scss */
+.panel:hover {
+  background-color: #f5f0fa;
+}
+
+/* line 97, ../sass/_main.scss */
+.container {
+  margin: 20px;
+  padding: 10px;
+}
+
+/* line 101, ../sass/_main.scss */
+.button-controls {
+  /* float: right; */
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+/* line 110, ../sass/_main.scss */
+.panel-heading .read {
+  float: left;
+}
+/* line 113, ../sass/_main.scss */
+.panel-heading .edit {
+  display: inline-block;
+  float: right;
+}
+
+/* line 118, ../sass/_main.scss */
+.input-group {
+  margin: 10px;
+}
+
+/* line 121, ../sass/_main.scss */
+.modal-title {
+  font-size: 30px;
+}
+
+/* line 124, ../sass/_main.scss */
+textarea {
+  margin: auto;
+}
+
+/* line 127, ../sass/_main.scss */
+textarea.form-control {
+  margin: auto;
+  width: 97%;
+}
+
+/* line 131, ../sass/_main.scss */
+input.form-control {
+  width: 100%;
+}
+
+/* line 134, ../sass/_main.scss */
+.panel_title_small {
+  font-size: 19px;
+}
+
+/* line 137, ../sass/_main.scss */
+.edit {
+  float: right;
+  z-index: 100;
+}
+
+/* line 141, ../sass/_main.scss */
+.textBlob_myText_row {
+  text-align: center;
+}
+
+/* line 144, ../sass/_main.scss */
+.clear {
+  clear: both;
+}
+
+/* line 147, ../sass/_main.scss */
+.edit button {
+  background: none;
+}
+
+/* line 150, ../sass/_main.scss */
+#posts_board__row {
+  display: none;
+}
+
+/* line 154, ../sass/_main.scss */
+.page-header {
+  position: relative;
+}
+/* line 156, ../sass/_main.scss */
+.page-header .edit {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+}
+
+/* line 162, ../sass/_main.scss */
+#addPostFormContainer {
+  position: relative;
+}
+
+/* line 169, ../sass/_main.scss */
+.h1 {
+  font-size: 70px;
+  color: #4F5D75;
+}
+
+/* line 173, ../sass/_main.scss */
+.h2 {
+  color: #9DA9A0;
+}
+
+/* line 178, ../sass/_main.scss */
+.btn {
+  background: transparent;
+  color: black;
+}
+
+/* line 185, ../sass/_main.scss */
+body {
+  color: #2D3142;
+  background: white;
+}
+
+/* line 189, ../sass/_main.scss */
+.panel {
+  background-color: transparent;
+  border: 1px solid;
+  border-color: #4F5D75;
+  padding: 5px;
+}
+/* line 194, ../sass/_main.scss */
+.panel .h2::first-letter {
+  font-size: 40px;
+}
+/* line 197, ../sass/_main.scss */
+.panel p {
+  color: #4F5D75;
+  line-height: 30px;
+  transition: 1000ms;
+}
+/* line 202, ../sass/_main.scss */
+.panel p:hover {
+  color: #black;
+}
+/* line 205, ../sass/_main.scss */
+.panel a {
+  color: #4F5D75;
+}
+
+/* line 211, ../sass/_main.scss */
+.boardContainer .panel {
+  height: 300px;
+  overflow: scroll;
+}
+/* line 214, ../sass/_main.scss */
+.boardContainer .panel .fa-times:hover {
+  color: red;
+}
+/* line 217, ../sass/_main.scss */
+.boardContainer .panel .fa-pencil:hover, .boardContainer .panel .fa-save:hover {
+  color: green;
+}
+/* line 222, ../sass/_main.scss */
+.boardContainer .panel:hover, .boardContainer .btn:hover {
+  transform: scale(1.05);
+}
+
+/* line 228, ../sass/_main.scss */
+.postContainer .panel {
+  height: 300px;
+  font-size: 23px;
+  color: #646464;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  overflow: scroll;
+}
+/* line 235, ../sass/_main.scss */
+.postContainer .panel .fa-times:hover {
+  color: red;
+}
+/* line 239, ../sass/_main.scss */
+.postContainer .panel .fa-pencil:hover, .postContainer .panel .fa-save:hover {
+  color: green;
+}
+
+/* line 244, ../sass/_main.scss */
+.styleless_btn {
+  border: 0 none;
+  background: none;
+}
+
+/* line 248, ../sass/_main.scss */
+.clear {
+  margin-bottom: 20px;
+}
+
+/* line 251, ../sass/_main.scss */
+.panel:hover {
+  border-color: #black;
+}
+
+/* line 254, ../sass/_main.scss */
+.highlight {
+  color: #black;
+}
+
+/* line 258, ../sass/_main.scss */
+.signInContainer {
+  width: 700px;
+  padding: 30px;
+  margin: 200px auto;
+  border: 1px solid #050500;
+  border-radius: 5px;
+}
+
+/* line 265, ../sass/_main.scss */
+.formcont {
+  width: 700px;
+  padding: 30px;
+  margin: 200px auto;
+  border: 1px solid #050500;
+  border-radius: 5px;
+}
+
+/* line 273, ../sass/_main.scss */
+.cont {
+  padding: 0px 50px;
+  min-width: 1000px;
+}
+
+/* line 277, ../sass/_main.scss */
+.pan-footer {
+  transition: 500ms;
+  background: rgba(250, 250, 250, 0.6);
+  border-radius: 5px;
+  border: 1px solid #050500;
+  position: absolute;
+  bottom: 40px;
+  right: 40px;
+  padding: 3px;
+}
+
+/* line 287, ../sass/_main.scss */
+.pan-footer:hover {
+  background: rgba(200, 200, 250, 0.6);
+}
+
+/* Free loader from http://codepen.io/highlyinteractive/pen/dCahl */
+/* line 292, ../sass/_main.scss */
+.whirlpool {
+  width: 100px;
+  height: 100px;
+  margin: 100px auto;
+  position: relative;
+}
+
+/* line 299, ../sass/_main.scss */
+.ring:before {
+  content: '';
+  border-radius: 50%;
+  border: 1px solid #555;
+  height: 30px;
+  width: 100px;
+  position: absolute;
+}
+
+/* line 309, ../sass/_main.scss */
+.ring1:before {
+  left: 40px;
+  width: 20px;
+  top: 12px;
+  height: 6px;
+  -webkit-animation: 2.5s ease 0s infinite spinner;
+  animation: 2.5s ease 0s infinite spinner;
+}
+
+/* line 319, ../sass/_main.scss */
+.ring2:before {
+  left: 35px;
+  width: 30px;
+  top: 10.5px;
+  height: 9px;
+  -webkit-animation: 2.5s ease 0.1s infinite spinner;
+  animation: 2.5s ease 0.1s infinite spinner;
+}
+
+/* line 329, ../sass/_main.scss */
+.ring3:before {
+  left: 30px;
+  width: 40px;
+  top: 9px;
+  height: 12px;
+  -webkit-animation: 2.5s ease 0.2s infinite spinner;
+  animation: 2.5s ease 0.2s infinite spinner;
+}
+
+/* line 339, ../sass/_main.scss */
+.ring4:before {
+  left: 25px;
+  width: 50px;
+  top: 7.5px;
+  height: 15px;
+  -webkit-animation: 2.5s ease 0.3s infinite spinner;
+  animation: 2.5s ease 0.3s infinite spinner;
+}
+
+/* line 349, ../sass/_main.scss */
+.ring5:before {
+  left: 20px;
+  width: 60px;
+  top: 6px;
+  height: 18px;
+  -webkit-animation: 2.5s ease 0.4s infinite spinner;
+  animation: 2.5s ease 0.4s infinite spinner;
+}
+
+/* line 359, ../sass/_main.scss */
+.ring6:before {
+  left: 15px;
+  width: 70px;
+  top: 4.5px;
+  height: 21px;
+  -webkit-animation: 2.5s ease 0.5s infinite spinner;
+  animation: 2.5s ease 0.5s infinite spinner;
+}
+
+/* line 369, ../sass/_main.scss */
+.ring7:before {
+  left: 10px;
+  width: 80px;
+  top: 3px;
+  height: 24px;
+  -webkit-animation: 2.5s ease 0.6s infinite spinner;
+  animation: 2.5s ease 0.6s infinite spinner;
+}
+
+/* line 379, ../sass/_main.scss */
+.ring8:before {
+  left: 5px;
+  width: 90px;
+  top: 1.5px;
+  height: 27px;
+  -webkit-animation: 2.5s ease 0.7s infinite spinner;
+  animation: 2.5s ease 0.7s infinite spinner;
+}
+
+/* line 389, ../sass/_main.scss */
+.ring9:before {
+  width: 100px;
+  height: 30px;
+  -webkit-animation: 2.5s ease 0.8s infinite spinner;
+  animation: 2.5s ease 0.8s infinite spinner;
+}
+
+@-webkit-keyframes spinner {
+  0% {
+    -webkit-transform: translateY(10px);
+    transform: translateY(10px);
+    -webkit-animation-timing-function: cubic-bezier(0.455, 0.03, 0.515, 0.955);
+    animation-timing-function: cubic-bezier(0.455, 0.03, 0.515, 0.955);
+  }
+  50% {
+    -webkit-transform: translateY(60px);
+    transform: translateY(60px);
+    -webkit-animation-timing-function: cubic-bezier(0.455, 0.03, 0.515, 0.955);
+    animation-timing-function: cubic-bezier(0.455, 0.03, 0.515, 0.955);
+  }
+  100% {
+    -webkit-transform: translateY(10px);
+    transform: translateY(10px);
+    -webkit-animation-timing-function: cubic-bezier(0.455, 0.03, 0.515, 0.955);
+    animation-timing-function: cubic-bezier(0.455, 0.03, 0.515, 0.955);
+  }
+}
+@keyframes spinner {
+  0% {
+    -webkit-transform: translateY(10px);
+    transform: translateY(10px);
+    -webkit-animation-timing-function: cubic-bezier(0.455, 0.03, 0.515, 0.955);
+    animation-timing-function: cubic-bezier(0.455, 0.03, 0.515, 0.955);
+  }
+  50% {
+    -webkit-transform: translateY(60px);
+    transform: translateY(60px);
+    -webkit-animation-timing-function: cubic-bezier(0.455, 0.03, 0.515, 0.955);
+    animation-timing-function: cubic-bezier(0.455, 0.03, 0.515, 0.955);
+  }
+  100% {
+    -webkit-transform: translateY(10px);
+    transform: translateY(10px);
+    -webkit-animation-timing-function: cubic-bezier(0.455, 0.03, 0.515, 0.955);
+    animation-timing-function: cubic-bezier(0.455, 0.03, 0.515, 0.955);
+  }
+}
+@keyframes fader {
+  0% {
+    opacity: 0;
+    animation-timing-function: cubic-bezier(0.455, 0.03, 0.515, 0.955);
+  }
+  20% {
+    opacity: 0;
+    animation-timing-function: cubic-bezier(0.455, 0.03, 0.515, 0.955);
+  }
+  50% {
+    opacity: 1;
+    animation-timing-function: cubic-bezier(0.455, 0.03, 0.515, 0.955);
+  }
+  80% {
+    opacity: 0;
+    animation-timing-function: cubic-bezier(0.455, 0.03, 0.515, 0.955);
+  }
+  100% {
+    opacity: 0;
+    animation-timing-function: cubic-bezier(0.455, 0.03, 0.515, 0.955);
+  }
+}
+@keyframes fader2 {
+  0% {
+    opacity: 0;
+    animation-timing-function: cubic-bezier(0.455, 0.03, 0.515, 0.955);
+  }
+  10% {
+    opacity: 0;
+    animation-timing-function: cubic-bezier(0.455, 0.03, 0.515, 0.955);
+  }
+  50% {
+    opacity: 1;
+    animation-timing-function: cubic-bezier(0.455, 0.03, 0.515, 0.955);
+  }
+  90% {
+    opacity: 0;
+    animation-timing-function: cubic-bezier(0.455, 0.03, 0.515, 0.955);
+  }
+  100% {
+    opacity: 0;
+    animation-timing-function: cubic-bezier(0.455, 0.03, 0.515, 0.955);
+  }
+}
+/* line 482, ../sass/_main.scss */
+.h4 {
+  text-align: center;
+}
+
+/* line 485, ../sass/_main.scss */
+span.error {
+  color: #941212;
+  animation: 4s ease 0.0s infinite fader2;
+}
+
+/* line 490, ../sass/_main.scss */
+.saving .del, .deleting .del, adding .del, .big_error .del {
+  color: #941212;
+}
+/* line 491, ../sass/_main.scss */
+.saving .add, .deleting .add, adding .add, .big_error .add {
+  color: #129412;
+}
+/* line 493, ../sass/_main.scss */
+.saving .s1, .deleting .s1, adding .s1, .big_error .s1 {
+  animation: 2s ease 0.0s infinite fader;
+}
+/* line 494, ../sass/_main.scss */
+.saving .s2, .deleting .s2, adding .s2, .big_error .s2 {
+  animation: 2s ease 0.1s infinite fader;
+}
+/* line 495, ../sass/_main.scss */
+.saving .s3, .deleting .s3, adding .s3, .big_error .s3 {
+  animation: 2s ease 0.2s infinite fader;
+}
+/* line 496, ../sass/_main.scss */
+.saving .s4, .deleting .s4, adding .s4, .big_error .s4 {
+  animation: 2s ease 0.3s infinite fader;
+}
+/* line 497, ../sass/_main.scss */
+.saving .s5, .deleting .s5, adding .s5, .big_error .s5 {
+  animation: 2s ease 0.4s infinite fader;
+}
+/* line 498, ../sass/_main.scss */
+.saving .s6, .deleting .s6, adding .s6, .big_error .s6 {
+  animation: 2s ease 0.5s infinite fader;
+}
+/* line 499, ../sass/_main.scss */
+.saving .s7, .deleting .s7, adding .s7, .big_error .s7 {
+  animation: 2s ease 0.6s infinite fader;
+}
+/* line 500, ../sass/_main.scss */
+.saving .s8, .deleting .s8, adding .s8, .big_error .s8 {
+  animation: 2s ease 0.7s infinite fader;
+}
+/* line 501, ../sass/_main.scss */
+.saving .s9, .deleting .s9, adding .s9, .big_error .s9 {
+  animation: 2s ease 0.8s infinite fader;
+}
+/* line 502, ../sass/_main.scss */
+.saving .s10, .deleting .s10, adding .s10, .big_error .s10 {
+  animation: 2s ease 0.9s infinite fader;
+}
+/* line 503, ../sass/_main.scss */
+.saving .s11, .deleting .s11, adding .s11, .big_error .s11 {
+  animation: 2s ease 1.0s infinite fader;
+}
+
+/* line 505, ../sass/_main.scss */
+.saving span {
+  opacity: 0;
+}

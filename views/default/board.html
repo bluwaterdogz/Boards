@@ -1,0 +1,419 @@
+{{extend 'layout.html'}}
+
+<div class="cont postContainer">
+    <div id="ractive">
+    </div>
+</div>
+
+<script id="template" type="text/ractive">
+<span></span>
+   <div class="page-header">
+
+        <span class="h1">
+            Bulletins. <br>
+        </span>
+        <span class="h2">
+                Board Page
+        </span>
+
+        <div class="btn-group edit">
+
+            {{if auth.user_id:}}
+                <button class="btn btn-success" id="add_post" on-click="add_new_post">Add New Post</button>
+                <!--<button class="btn btn-danger hidden" id="delete_posts_button" on-click="delete_marked_posts">Delete Posts</button>-->
+                <!--<button class="btn btn-primary hidden" id="cancel_delete_posts_button" on-click="cancel_delete_posts">Cancel Delete</button>-->
+            {{else:}}
+                {{=A('Sign In', _class="btn btn-primary", _href=URL('default','user',args=['login']))}}
+                {{=A('Sign Up', _class="btn btn-success", _href=URL('default','user',args=['register']))}}
+            {{pass}}
+            {{=A('Home',_href=URL('default','index'),_class="btn btn-primary")}}
+        </div>
+            {{if auth.user_id:}}
+            <span class="deleting"><span class="del"><span class="s1">Deleting...</span></span></span>
+            <span class="adding"><span class="add"><span class="s1">Adding...</span></span></span>
+            <span class="big_error"><span class="del"><span class="s1">Error</span></span></span>
+            <div class="btn-group edit delete_buttons" style="margin-top:5%;">
+                <button class="btn btn-danger" id="delete_posts_button" on-click="delete_marked_posts">{{=trashcan_icon}}</button>
+                <button class="btn btn-primary" id="cancel_delete_posts_button" on-click="cancel_delete_posts">Cancel Delete</button>
+            </div>
+        {{pass}}
+    </div>
+
+
+<div class="page-body">
+
+
+    <div id="message" class="h2"></div>
+    {% #if loading %}
+        <div class="whirlpool">
+            <div class="ring ring1"></div>
+            <div class="ring ring2"></div>
+            <div class="ring ring3"></div>
+            <div class="ring ring4"></div>
+            <div class="ring ring5"></div>
+            <div class="ring ring6"></div>
+            <div class="ring ring7"></div>
+            <div class="ring ring8"></div>
+            <div class="ring ring9"></div>
+        </div>
+    {% /if %}
+
+    {% #if draft_editing%}
+    <div class="col-md-6 draft">
+            <div class="panel"on-blur="submit_new_post">
+                <div class="panel-heading">
+                    <input class="title" type="text" id = "new_post_title " value="{% new_post_title %}" />
+
+                    <span class="error hide">!</span>
+                    <div class="edit">
+                        <!-- Show if user who is logged in created post-->
+                        <button class="styleless_btn save" on-click="submit_new_post">{{=save_icon}}</button>
+                        <button class="styleless_btn" data-postid="{% post_id %}" on-click="cancel_new_post">
+                            {{=delete_icon}}
+                        </button>
+                        <span class="error trash hide">{{=trashcan_icon}}</span>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div class="panel-body">
+                    <!--<div class="h2">-->
+                        <textarea class="desc" type="text" id="new_post_desc " value="{% new_post_desc %}" data-postid="{% post_id %}"/>
+                        <button class="styleless_btn save hide" on-click="save_published">{{=save_icon}}</button>
+                        <span class="error hide">!</span>
+                    <!--</div>-->
+                    <p>New post</p>
+                    <div class="h4">{% post_createdOn %}</div>
+                </div>
+            </div>
+        </div>
+    {%/if%}
+
+    {% #post_dict:post_id %}
+    {% #if post_board == board_id%}
+        <div class="col-md-6 published">
+            <div class="panel">
+                {% #if {{=auth.user_id}} === post_createdBy %}
+                    <div class="panel-heading">
+                        <input class="title" type="text" value="{% post_title %}" data-postid="{% post_id %}" on-click="edit_published" on-blur="stop_edit"/>
+                        <button class="styleless_btn save hide" on-click="save_published">{{=save_icon}}</button>
+                        <span class="error hide">!</span>
+                        <div class="edit">
+                            <!-- Show if user who is logged in created post-->
+                            <button class="styleless_btn" data-postid="{% post_id %}" on-click="delete_post">
+                                {{=delete_icon}}
+                            </button>
+                            <button class="styleless_btn trash_button" data-postid="{% post_id %}" on-click="mark_to_delete">
+                                {{=trashcan_icon}}
+                            </button>
+                            <span class="error trash hide">{{=trashcan_icon}}</span>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="panel-body">
+                         <div class="h4">You said</div>
+                        <textarea class="desc" type="text" value="{% post_description %}" data-postid="{% post_id %}" on-click="edit_published" on-blur="stop_edit"/>
+                        <button class="styleless_btn save hide" on-click="save_published">{{=save_icon}}</button>
+                        <span class="error hide">!</span>
+
+                        <div class="h4">on {% post_createdOn %}</div>
+
+                    </div>
+                {% else %}
+                    <div class="panel-heading">
+                            {% post_title %}
+                        <div class="clear"></div>
+                    </div>
+                    <div class="panel-body">
+                         <div class="h4">{% post_user %} said</div>
+                         <div class="h2">{% post_description %}</div>
+                         <div class="h4">on {% post_createdOn %}</div>
+                    </div>
+
+                {% /if %}
+            </div>
+        </div>
+        {%/if%}
+    {% /post_dict %}
+
+    </script>
+
+    <script>
+    $(function(){
+
+        var ractive = new Ractive({
+            el: '#ractive',
+            template:'#template',
+            delimiters:['{%','%}'],
+            tripleDelimiters:['{%%','%%}'],
+            data:{
+                post_dict:{},
+                board_id:"{{=board_id}}",
+                posts_to_delete:[],
+                editing:false,
+                draft_editing:false,
+                loading:true,
+                draft_id:"{{=draft_id}}",
+                new_post_desc:"",
+                new_post_title:"",
+                edit_post_desc:"",
+                edit_post_title:"",
+                editing_post_id:""
+            }
+        });
+
+        $('.delete_buttons').hide();
+        $('.deleting').hide();
+        $('.adding').hide();
+        $('.big_error').hide();
+
+        <!-- Load Boards-->
+        function load_posts(){
+            $.ajax("{{=URL('default','load_posts',user_signature=True)}}",{
+                method:'POST',
+                success:function(data){
+                    ractive.set('post_dict',data['post_dict']);
+                    ractive.set('loading',false);
+
+                     check_for_posts();
+                },
+                error:function(error){
+                    ractive.set('loading',false);
+                    $("#message").text("Looks like your posts got lost somewhere....");
+                }
+            });
+        }
+
+        function check_for_posts(){
+             // check length of posts for this board
+            if(
+                !ractive.get('loading') &&
+                !ractive.get('editing') &&
+                Object.keys(ractive.get('post_dict')).length<=0
+            ){
+                $("#message").text("No posts yet! Why don't you post.... something?");
+            }else{
+                $("#message").text("");
+            }
+        }
+
+        <!-- Get new UUID -->
+        function get_uuid(){
+            $.ajax("{{=URL('default','get_new_id')}}",{
+                method:'POST',
+                success: function(data){
+                    ractive.set('draft_id',data['draft_id']);
+                }
+            });
+        }
+
+        <!-- send data to server -->
+        function save_post(title, desc, draft, element){
+            var get_draft_id = ractive.get('draft_id');
+            var get_board_id = ractive.get('board_id');
+
+            $.ajax("{{=URL('default','save_post', user_signature=True)}}",{
+
+                data:{
+                    descrption:desc,
+                    title:title,
+                    board_id: get_board_id,
+                    post_id: get_draft_id
+
+
+                    },
+                method:'POST',
+                success:function(){
+                    var post_dict = ractive.get('post_dict');
+                    // if the objects id can be found in the ractive object, update the object with that id
+
+                    if(get_draft_id in post_dict){
+                        post_dict[get_draft_id]['post_title'] = title;
+                        post_dict[get_draft_id]['post_description'] = desc;
+                        post_dict[get_draft_id]['post_is_draft'] = draft;
+
+                    // if it isn't, create a new id and add it into the ractive object
+                    }else{
+                        post_dict[get_draft_id] = {
+                            post_title : title,
+                            post_description : desc,
+                            is_draft : draft
+                        };
+                    }
+                    ractive.set('post_dict', post_dict);
+                    load_posts();
+
+                    $('.adding').fadeOut();
+                    //only hide the saving graphic for that particular element
+                    var el = element;
+                    if(el)
+                        $(el).next().addClass('hide');
+                },
+                error:function(){
+                    var el = element;
+                    if(el){
+                        $('.big_error').fadeIn();
+                        $(el).next().addClass('hide');
+                        $(el).siblings(".error").removeClass('hide');
+                    }
+
+                }
+            });
+        }
+
+        function periodic_update(){
+            if(!ractive.get('editing') && !ractive.get('draft_editing'))
+                load_posts()
+        }
+
+        ractive.on('delete_post', function(e){
+
+            var t = $(e.node);
+            var clicked_id = t.data('postid');
+            var post_dict = ractive.get('post_dict');
+
+            $.ajax("{{=URL('default','delete_post', user_signature=True)}}",{
+                data:{
+                    post_id : clicked_id
+                    },
+                method:'POST',
+                success:function(){
+                    load_posts();
+
+                    }
+            });
+        });
+
+        ractive.on('mark_to_delete',function(e){
+            var postid = $(e.node).data("postid");
+            var posts_to_delete = ractive.get('posts_to_delete');
+            posts_to_delete.push(postid);
+            ractive.set('posts_to_delete',posts_to_delete);
+
+            $(e.node).next().removeClass('hide');
+            $(e.node).hide();
+            $('.delete_buttons').fadeIn();
+        })
+
+        ractive.on('delete_marked_posts', function(){
+            var post_ids_to_delete = ractive.get('posts_to_delete');
+            $(".deleting").fadeIn();
+            $.each(post_ids_to_delete, function(i, marked_id){
+                $.ajax("{{=URL('default','delete_post', user_signature=True)}}",{
+                    data:{
+                        post_id : marked_id
+                        },
+                    method:'POST',
+                    success:function(){
+                    $('.delete_buttons').fadeOut();
+                    $('.deleting').fadeOut();
+
+                    load_posts();
+                    }
+                });
+            });
+            ractive.set('posts_to_delete',[]);
+
+        })
+
+        ractive.on('cancel_delete_posts',function(){
+            ractive.set('posts_to_delete',[]);
+            $('.trash').addClass('hide');
+            $('.delete_buttons').fadeOut();
+            $('.trash_button').fadeIn();
+        })
+
+        ractive.on('edit_published',function(e){
+            ractive.set('editing', true);
+
+            var editing_post_id = $(e.node).data('postid');
+            var post_dict = ractive.get('post_dict');
+
+            ractive.set('edit_post_title',post_dict[editing_post_id]['post_title']);
+            ractive.set('edit_post_desc',post_dict[editing_post_id]['post_description']);
+            ractive.set('editing_post_id', editing_post_id);
+
+            $('.save').addClass('hide');
+            $(e.node).next().removeClass('hide');
+
+        })
+
+        ractive.on('stop_edit',function(e){
+            var t = $(e.node);
+
+             // if title is being edited
+            if(t.hasClass('title')){
+                var title = $(e.node).val();
+                ractive.set('edit_post_title', title);
+            // if title is being edited
+            }else if(t.hasClass('desc')){
+                var desc = $(e.node).val();
+                ractive.set('edit_post_desc', desc);
+            }
+
+            ractive.set('editing', false);
+
+            setTimeout(function(){
+                $(e.node).next().addClass('hide');}
+            ,200);
+        })
+
+        ractive.on('add_new_post',function(){
+            ractive.set('new_post_desc',"");
+            ractive.set('new_post_title',"");
+            ractive.set('draft_editing', true);
+
+            var title = ractive.get('new_post_title');
+            var desc = ractive.get('new_post_desc');
+
+            $('#message').text("");
+            get_uuid();
+        })
+
+        ractive.on('submit_new_post',function(){
+            var title = ractive.get("new_post_title");
+            var desc =  ractive.get("new_post_desc");
+            $('.adding').fadeIn();
+            if($.trim(title).length>0 || $.trim(desc).length>0 ){
+                save_post(title,desc,false);
+            }else{
+                $('.adding').fadeOut();
+                $("#message").text("At least add a title or a description!");
+            }
+            ractive.set("draft_editing",false);
+
+        })
+
+        ractive.on('cancel_new_post',function(){
+            ractive.set("new_post_title","");
+            ractive.set("new_post_desc","");
+            ractive.set("draft_editing",false);
+
+        })
+
+        ractive.on('save_published',function(e){
+            var post_id = ractive.get('editing_post_id');
+            var title = ractive.get('edit_post_title');
+            var desc = ractive.get('edit_post_desc');
+
+            ractive.set('draft_id', post_id);
+            if($.trim(title).length>0 || $.trim(desc).length>0 ){
+
+                save_post(title, desc,false,e.node);
+
+                $(e.node).after('<span class="saving"><span class="s1">S</span><span class="s2">a</span><span class="s3">v</span><span class="s4">i</span><span class="s5">n</span><span class="s6">g</span><span class="s7">.</span><span class="s8">.</span><span class="s9">.</span></span>');
+
+                ractive.set('edit_post_desc',"");
+                ractive.set('edit_post_title',"");
+                ractive.set('editing_post_id', "");
+            }else{
+                $("#message").text("At least add a title or a description!");
+            }
+            ractive.set("draft_editing",false);
+        })
+
+
+        load_posts();
+        setInterval(periodic_update,5000);
+    });
+    </script>
+
